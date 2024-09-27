@@ -107,7 +107,7 @@ function Registration() {
               <button
                 type="submit"
                 disabled={isRegistering}
-                className="text-white bg-red-600 rounded-lg py-2 my-4 w-full rounded hover:bg-red-700"
+                className="text-white bg-red-600 rounded-lg py-2 my-4 w-full hover:bg-red-700"
               >
                 Register
               </button>
