@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import login from "../assets/images/login.jpg";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { doSignInWithEmailAndPassword } from "../firebase/auth";
 import { useAuth } from "../context/authcontext";
 
-function LogIn() {
+function Login() {
   const navigate = useNavigate(); // Initialize navigate
   const { userLoggedIn, loading } = useAuth();
   const [email, setEmail] = useState("");
@@ -99,4 +98,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+export default Login;

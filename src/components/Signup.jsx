@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import signup from "../assets/images/signup.jpg";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { doCreateUserWithEmailAndPassword, doSignInWithGoogle } from "../firebase/auth"; 
 import { useAuth } from "../context/authcontext";
 
-function Registration() {
+function Signup() {
   const navigate = useNavigate(); // Initialize navigate
   const { userLoggedIn } = useAuth(); // Access userLoggedIn from context
   const [fullName, setFullName] = useState("");
@@ -150,4 +149,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default Signup;

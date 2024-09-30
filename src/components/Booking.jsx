@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import backgroundImage from '../assets/images/CIMC.jpg';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -53,7 +54,7 @@ const Booking = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-2xl bg-cover bg-center flex items-center justify-center h-full bg-opacity-50" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <h2 className="text-2xl font-semibold text-center mb-4">Book an Appointment</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -63,7 +64,7 @@ const Booking = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="mt-1 block w-full px-3 py-2 border border-green-500 rounded-md"
             placeholder="Enter your name"
             required
           />
@@ -75,7 +76,7 @@ const Booking = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="mt-1 block w-full px-3 py-2 border border-green-500 rounded-md"
             placeholder="Enter your email"
             required
           />
@@ -87,7 +88,7 @@ const Booking = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="mt-1 block w-full px-3 py-2 border border-green-500 rounded-md"
             placeholder="Enter your phone number"
             required
           />
@@ -99,7 +100,7 @@ const Booking = () => {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="mt-1 block w-full px-3 py-2 border border-green-500 rounded-md"
             required
           />
         </div>
@@ -110,14 +111,14 @@ const Booking = () => {
             name="time"
             value={formData.time}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="mt-1 block w-full px-3 py-2 border border-green-500 rounded-md"
             required
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+          className="w-full bg-black text-white py-2 rounded-md hover:bg-green-700"
         >
           {loading ? 'Booking...' : 'Book Appointment'}
         </button>

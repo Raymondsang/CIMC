@@ -47,6 +47,8 @@
 
 // export default Landing
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 const Landing = () => {
   return (
@@ -64,21 +66,21 @@ const Landing = () => {
           </button>
         </div>
         <div className="flex space-x-4">
-          <button className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-500">
+          <button className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-500 ">
             Sign In
           </button>
           <button className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-500">
-            Sign Up
+            Book An Appointment
           </button>
         </div>
       </nav>
       <div className=" justify-between items-start p-4 mt-36">
         <div className="flex">
-          <h1 className="text-3xl font-bold mb-16 mr-16 border p-4 bg-white rounded shadow-md">
+          <h1 className="text-3xl font-bold mb-16 mr-16 border p-4 bg-white rounded-xl shadow-md">
             CORIASS INTEGRITY MANAGEMENT CONSULTANTS (K) LTD.
           </h1>
 
-          <div className="mb-6 border p-4 bg-white rounded shadow-md flex-grow">
+          <div className="mb-6 border p-4 bg-white rounded-xl shadow-md flex-grow">
             <h2 className="text-2xl font-semibold">Publications.</h2>
             <ul className="list-disc list-inside mt-2">
               <li>Corruption Risk Assessment and Risk Mitigation</li>
@@ -89,9 +91,9 @@ const Landing = () => {
           </div>
         </div>
 
-        <div className="flex-col-reverse border p-4 bg-white rounded shadow-md mt-12">
+        <div className="flex-col-reverse border p-4 bg-white rounded-xl shadow-md mt-12">
           <div>
-            {" "}
+            
             <h1 className="font-black ml-8 text-xl">Our Services.</h1>
             <ul className="list-disc list-inside mt-2">
               <li>Corruption Risk Assessment and Risk Mitigation</li>
@@ -103,16 +105,16 @@ const Landing = () => {
         </div>
       </div>
       <div className="flex justify-between w-3/4 max-w-2xl mt-12">
-        <div className="flex space-x-4 mb-8">
-          <button className="bg-green-500 text-white p-2 rounded-xl hover:bg-black">
+        <div className="flex space-x-4">
+          <button className="bg-black text-white p-2 rounded-xl hover:bg-green-700">
             Get Started
           </button>
-          <button className="bg-green-500 text-white px-6 py-3 rounded-xl hover:bg-black">
+          <button className="bg-black text-white px-6 py-3 rounded-xl hover:bg-green-700">
             Contact Us
           </button>
         </div>
 
-        <div>
+        <div border className="p-4 bg-white rounded-xl shadow-md">
           <h2 className="text-xl font-semibold">Upcoming Events</h2>
           <ul>
             <li>1.</li>
