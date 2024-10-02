@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import backgroundImage from '../assets/images/CIMC.jpg';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from './Firebase/FirebaseConfig';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -13,45 +14,90 @@ const Booking = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Handle form input changes
+  // Handle form change and input value updates 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submission
+  // Handle the form submit and send booking data to Firestore  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
-
-    // Basic input validation
+  
     if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time) {
       setMessage('Please fill in all fields.');
       setLoading(false);
       return;
     }
-
-    // Send booking data to backend
+  
     try {
-      const response = await fetch('http://localhost:5000/api/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      // Send booking data to Firestore
+      const docRef = await addDoc(collection(db, "bookings"), {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        date: formData.date,
+        time: formData.time,
+        createdAt: new Date()
       });
-
-      const result = await response.json();
-      if (response.ok) {
-        setMessage(result.message);
-      } else {
-        setMessage('Error: ' + result.message);
-      }
+  
+      console.log("Document written with ID: ", docRef.id);
+      setMessage('Booking successful!');
     } catch (error) {
+      console.error('Error adding document: ', error);
       setMessage('Error booking appointment. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+  
+
+  
+  // // Handle form submit
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   setMessage('');
+  
+  //   // Basic input validation
+  //   if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time) {
+  //     setMessage('Please fill in all fields.');
+  //     setLoading(false);
+  //     return;
+  //   }
+  
+  //   // Logging the form data for debugging
+  //   console.log('Sending data:', formData);
+  
+  //   // Send booking data to backend
+  //   try {
+  //     const response = await fetch('http://localhost:5000/api/book', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         userName: formData.name,
+  //         userEmail: formData.email,
+  //         appointmentDetails: `Phone: ${formData.phone}, Date: ${formData.date}, Time: ${formData.time}`,
+  //       }),
+  //     });
+  
+  //     const result = await response.json();
+  //     console.log('Backend Response:', result); // Add this line to log the response
+  
+  //     if (response.ok) {
+  //       setMessage(result.message);
+  //     } else {
+  //       setMessage('Error: ' + result.message);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     setMessage('Error booking appointment. Please try again.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-2xl bg-cover bg-center flex items-center justify-center h-full bg-opacity-50" style={{ backgroundImage: `url(${backgroundImage})` }}>
