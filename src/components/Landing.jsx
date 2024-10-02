@@ -40,7 +40,7 @@ function Landing() {
         
         <div className="flex space-x-4">
           <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Get Started</button>
-          {/* <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Contact Us</button> */}
+          <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Contact Us</button>
         </div>
       </main>
 

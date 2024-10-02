@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from './Firebase/FirebaseConfig';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -24,38 +26,27 @@ const Booking = () => {
     setLoading(true);
     setMessage('');
   
-    // Basic input validation
     if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time) {
       setMessage('Please fill in all fields.');
       setLoading(false);
       return;
     }
   
-    // Logging the form data for debugging
-    console.log('Sending data:', formData);
-  
-    // Send booking data to backend
     try {
-      const response = await fetch('http://localhost:5000/api/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userName: formData.name,
-          userEmail: formData.email,
-          appointmentDetails: `Phone: ${formData.phone}, Date: ${formData.date}, Time: ${formData.time}`,
-        }),
+      // Send booking data to Firestore
+      const docRef = await addDoc(collection(db, "bookings"), {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        date: formData.date,
+        time: formData.time,
+        createdAt: new Date()
       });
   
-      const result = await response.json();
-      console.log('Backend Response:', result); // Add this line to log the response
-  
-      if (response.ok) {
-        setMessage(result.message);
-      } else {
-        setMessage('Error: ' + result.message);
-      }
+      console.log("Document written with ID: ", docRef.id);
+      setMessage('Booking successful!');
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error adding document: ', error);
       setMessage('Error booking appointment. Please try again.');
     } finally {
       setLoading(false);
@@ -63,34 +54,45 @@ const Booking = () => {
   };
   
 
-  // Handle form submission
+  
+  // // Handle form submit
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   setLoading(true);
   //   setMessage('');
-
+  
   //   // Basic input validation
   //   if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time) {
   //     setMessage('Please fill in all fields.');
   //     setLoading(false);
   //     return;
   //   }
-
+  
+  //   // Logging the form data for debugging
+  //   console.log('Sending data:', formData);
+  
   //   // Send booking data to backend
   //   try {
   //     const response = await fetch('http://localhost:5000/api/book', {
   //       method: 'POST',
   //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(formData),
+  //       body: JSON.stringify({
+  //         userName: formData.name,
+  //         userEmail: formData.email,
+  //         appointmentDetails: `Phone: ${formData.phone}, Date: ${formData.date}, Time: ${formData.time}`,
+  //       }),
   //     });
-
+  
   //     const result = await response.json();
+  //     console.log('Backend Response:', result); // Add this line to log the response
+  
   //     if (response.ok) {
   //       setMessage(result.message);
   //     } else {
   //       setMessage('Error: ' + result.message);
   //     }
   //   } catch (error) {
+  //     console.error('Error:', error);
   //     setMessage('Error booking appointment. Please try again.');
   //   } finally {
   //     setLoading(false);
