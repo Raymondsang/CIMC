@@ -15,7 +15,6 @@ function Navbar() {
       </nav>
 
       <div className="space-x-4">
-        
         <Link to="/signin" className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800">Sign In</Link>
         <Link to="/signup" className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800">Sign Up</Link>
       </div>
