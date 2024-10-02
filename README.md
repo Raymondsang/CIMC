@@ -19,3 +19,23 @@ pip install Flask flask-cors python-dotenv watchdog
 ## how to run the code
 python app.py
 
+## functions 
+remaining part the nodemailer
+API key to run
+API key from node
+
+## codes to run after configuration(for node mailer)
+
+npm install -g firebase-tools
+firebase init functions
+
+firebase deploy --only functions
+npm install nodemailer
+
+
+## securering the API key
+Store your SendGrid API key or Gmail credentials in Firebase Functions Environment Config securely:
+
+# firebase functions:config:set sendgrid.key="YOUR_SENDGRID_API_KEY"
+# sgMail.setApiKey(functions.config().sendgrid.key);
+

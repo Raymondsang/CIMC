@@ -1,7 +1,6 @@
-// src/components/ContactForm.js
 import { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../components/Firebase/FirebaseConfig';
+import { db } from './Firebase/FirebaseConfig';
 
 function ContactForm() {
     const [formData, setFormData] = useState({
