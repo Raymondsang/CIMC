@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar'; 
-
+import { Link } from 'react-router-dom';
 function Landing() {
   return (
     <div className="bg-green-100 min-h-screen flex flex-col">
@@ -39,8 +39,7 @@ function Landing() {
 
         
         <div className="flex space-x-4">
-          <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Get Started</button>
-          <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Contact Us</button>
+          <Link to="/contact" className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Contact Us</Link>
         </div>
       </main>
 
