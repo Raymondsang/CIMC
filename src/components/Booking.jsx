@@ -20,7 +20,7 @@ const Booking = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submit
+  // Handle the form submit and send booking data to Firestore  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
