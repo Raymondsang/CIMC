@@ -5,8 +5,7 @@ function Navbar() {
   return (
     <header className="flex justify-between items-center p-4 bg-white shadow-md">
       <div className="flex items-center">
-        <img src="" alt="Logo" className="h-10 w-auto" />
-        <h1 className="text-xl font-bold ml-2">Your Company</h1>
+        <img src="src/assets/images/CIMC logo_page-0001.jpg" alt="Logo" className="h-10 w-auto" />
       </div>
 
       <nav className="space-x-8">
