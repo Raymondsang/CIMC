@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { doCreateUserWithEmailAndPassword, doSignInWithGoogle } from "../firebase/auth"; 
 import { useAuth } from "../context/authcontext";
 
-function Signup() {
+function SignUp() {
   const navigate = useNavigate(); // Initialize navigate
   const { userLoggedIn } = useAuth(); // Access userLoggedIn from context
   const [fullName, setFullName] = useState("");
@@ -149,5 +149,5 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignUp;
 

@@ -1,44 +1,28 @@
-import { useState } from 'react'
-import './App.css'
-import Landing from './components/Landing'
-import Booking from './components/Booking'
-import { Routes } from 'react-router-dom'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import ForgotPassword from './components/Forgotpassword'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Landing from './components/Landing';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import Booking from './components/Booking';
+import ContactForm from './components/ContactForm.jsx';
+import Contact from './components/Contact.jsx';  
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-  //  <div>
-  //   <div>
-  //     <Landing/>
-  //   </div>
-  //   <div>
-  //     <section>
-  //       <Booking/>
-  //     </section>
-  //   </div>
-  //  </div>
-  // <ThemeProvider>
-    
-      // <UserProvider>
-        <Router>
-          <div>
-          <Routes>
-            <Route exact path="/" component={<Landing/>} />
-            <Route path="/booking" component={<Booking/>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} />
-          </Routes>
-          </div>
-        </Router>
-      // </UserProvider>
-    // </ThemeProvider>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path='/booking' element={<Booking />} />
+        <Route path='/ContactForm' element={<ContactForm />} />
+        <Route path='/Contact' element={<Contact />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
+
+
+
