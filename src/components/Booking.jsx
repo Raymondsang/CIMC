@@ -14,7 +14,7 @@ const Booking = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Handle form input changes
+  // Handle form change and input value updates 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
