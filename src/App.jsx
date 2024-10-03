@@ -6,17 +6,19 @@ import SignUp from './components/SignUp';
 import Booking from './components/Booking';
 import ContactForm from './components/ContactForm.jsx';
 import Contact from './components/Contact.jsx';  
+import About from './components/About.jsx';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path='/booking' element={<Booking />} />
         <Route path='/ContactForm' element={<ContactForm />} />
         <Route path='/Contact' element={<Contact />} />
+        <Route path='/About' element={<About />} />
       </Routes>
     </Router>
   );

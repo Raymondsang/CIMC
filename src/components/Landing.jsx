@@ -40,11 +40,12 @@ function Landing() {
         
         <div className="flex space-x-4">
           <Link to="/contact" className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Contact Us</Link>
+          <Link to="/ContactForm" className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Talk to a Consultant</Link>
         </div>
       </main>
 
       
-      <footer className="bg-green-900 text-white p-4 mt-8">
+      <footer className="bg-green-900 text-white p-4 mt-auto">
         <div className="text-center space-y-2">
           <p>NBK Building, Harambee Avenue</p>
           <p>Tel: 0202323175/6. FAX: 0202323289</p>
