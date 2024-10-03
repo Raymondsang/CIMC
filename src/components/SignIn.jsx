@@ -19,6 +19,8 @@ function SignIn() {
   };
 
   return (
+    
+    
     <div className="flex justify-center items-center min-h-screen bg-green-200">
       <form className="p-10 bg-white rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Sign In</h2>
@@ -47,7 +49,7 @@ function SignIn() {
         </div>
         <button
           onClick={handleSignIn}
-          className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
+          className="w-full bg-black text-white py-2 rounded-md hover:bg-green-700"
         >
           Sign In
         </button>
@@ -64,6 +66,7 @@ function SignIn() {
         </div>
       </form>
     </div>
+    
   );
 }
 

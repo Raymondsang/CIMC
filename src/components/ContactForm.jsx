@@ -35,7 +35,8 @@ function ContactForm() {
     };
 
     return (
-        <div className="max-w-md mx-auto p-4">
+ 
+        <div className="mt-32 max-w-md mx-auto p-4 bg-green-200 rounded-xl shadow-xl">
             <h2 className="text-2xl mb-4">Contact Us</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -61,7 +62,7 @@ function ContactForm() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description or query</label>
                     <textarea
                         name="description"
                         value={formData.description}
@@ -79,6 +80,7 @@ function ContactForm() {
             </form>
             {message && <p className="mt-4">{message}</p>}
         </div>
+        
     );
 }
 
