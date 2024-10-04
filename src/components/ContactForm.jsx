@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from './Firebase/FirebaseConfig';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 function ContactForm() {
     const [formData, setFormData] = useState({
@@ -36,7 +38,10 @@ function ContactForm() {
 
     return (
  
-        <div className="mt-32 max-w-md mx-auto p-4 bg-green-200 rounded-xl shadow-xl">
+ <div className="bg-green-100">
+
+    <Navbar />
+        <div className="mt-32 max-w-md mx-auto p-4 bg-white rounded-xl shadow-xl">
             <h2 className="text-2xl mb-4">Contact Us</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -73,14 +78,17 @@ function ContactForm() {
                 </div>
                 <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600"
+                    className="px-4 py-2 bg-black text-white rounded-md shadow-sm hover:bg-green-600"
                 >
                     Submit
                 </button>
             </form>
             {message && <p className="mt-4">{message}</p>}
         </div>
-        
+         <Footer />
+       
+ </div>
+     
     );
 }
 
