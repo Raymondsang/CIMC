@@ -24,7 +24,7 @@ function SignUp() {
 
     <div>
       <Navbar />
-         <div className="flex justify-center items-center min-h-screen bg-green-200">
+         <div className="flex justify-center items-center min-h-screen bg-green-100">
       <form className="p-10 bg-white rounded-xl shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
