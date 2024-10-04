@@ -22,6 +22,6 @@ function Navbar() {
       </div>
     </header>
   );
-}
+}git 
 
 export default Navbar;
