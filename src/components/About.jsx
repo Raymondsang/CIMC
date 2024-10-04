@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from './Navbar'
+import Footer from './Footer'
 
 const About = () => {
   return (
-    <div className="bg-green-300 min-h-screen">
+    <div className="bg-green-100 min-h-screen">
         <Navbar/>
         <div>
             <div className="text-center mt-10 mb-6 font-black text-3xl">
@@ -26,7 +27,9 @@ const About = () => {
                
             </div>
         </div>
+        <Footer />
     </div>
+    
   )
 }
 

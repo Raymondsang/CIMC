@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar'; 
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 function Landing() {
   return (
     <div className="bg-green-100 min-h-screen flex flex-col">
@@ -39,20 +40,12 @@ function Landing() {
 
         
         <div className="flex space-x-4">
-          <Link to="/contact" className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Contact Us</Link>
-          <Link to="/ContactForm" className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Talk to a Consultant</Link>
+          
+          <Link to="/ContactForm" className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Contact Us</Link>
         </div>
       </main>
 
-      
-      <footer className="bg-green-900 text-white p-4 mt-auto">
-        <div className="text-center space-y-2">
-          <p>NBK Building, Harambee Avenue</p>
-          <p>Tel: 0202323175/6. FAX: 0202323289</p>
-          <p>Email: cimc@corias.com</p>
-          <p className="font-bold">PREVENTION IS THE CURE CIMC (K)</p>
-        </div>
-      </footer>
+    <Footer />
     </div>
   );
 }
