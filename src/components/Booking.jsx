@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from './Firebase/FirebaseConfig';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -100,7 +102,11 @@ const Booking = () => {
   // };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-2xl bg-cover bg-center flex items-center justify-center h-full bg-opacity-50" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    
+    <div className="bg-green-100">
+         <Navbar />
+    <div className="bg-white max-w-md mx-auto p-6 mt-28 rounded-lg shadow-md">
+      
       <h2 className="text-2xl font-semibold text-center mb-4">Book an Appointment</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -140,7 +146,7 @@ const Booking = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Date:</label>
+          <label className="block text-sm font-medium text-gray-700 border-2px border-green-400">Date:</label>
           <input
             type="date"
             name="date"
@@ -171,6 +177,9 @@ const Booking = () => {
         {message && <p className="mt-4 text-center text-green-600">{message}</p>}
       </form>
     </div>
+    <Footer />
+    </div>
+  
   );
 };
 

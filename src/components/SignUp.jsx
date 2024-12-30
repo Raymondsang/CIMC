@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./Firebase/FirebaseConfig";  
+import { auth } from "./Firebase/FirebaseConfig"; 
+import Navbar from "./Navbar";
+import Footer from "./Footer"; 
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -19,8 +21,11 @@ function SignUp() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-green-200">
-      <form className="p-10 bg-white rounded shadow-md w-96">
+
+    <div>
+      <Navbar />
+         <div className="flex justify-center items-center min-h-screen bg-green-100">
+      <form className="p-10 bg-white rounded-xl shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
@@ -47,7 +52,7 @@ function SignUp() {
         </div>
         <button
           onClick={handleSignUp}
-          className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
+          className="w-full bg-black text-white py-2 rounded-lg hover:bg-green-700"
         >
           Sign Up
         </button>
@@ -57,13 +62,16 @@ function SignUp() {
           <p className="text-gray-600">Already have an account? 
             <button 
               onClick={() => navigate("/signin")}
-              className="text-blue-500 underline ml-1">
+              className="text-green-700 underline ml-1">
               Sign In
             </button>
           </p>
         </div>
       </form>
     </div>
+    <Footer />
+    </div>
+   
   );
 }
 
