@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "./Firebase/auth";
+import { useAuth} from "../contexts/authContext";
 import { auth } from "./Firebase/FirebaseConfig";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -8,24 +9,43 @@ import { Mail, Lock, ArrowRight } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function SignIn() {
+const SignIn = () => {
+
+  const { userLoggedIn } = useAuth()
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        toast.success("Successfully logged in!", {
-          position: "top-center",
-          autoClose: 3000,
-        });
-        setTimeout(() => navigate("/"), 3000); // Redirect after toast
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    if(!isSigningIn) {
+      setIsSigningIn(true)
+      await doSignInWithEmailAndPassword(email, password)
+    };
+
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then(() => {
+  //       toast.success("Successfully logged in!", {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //       });
+  //       setTimeout(() => navigate("/"), 3000); // Redirect after toast
+  //     })
+  //     .catch((err) => setError(err.message));
+  // };
+
+  const onGoogleSignIn = (e) => {
+    e.preventDefault()
+    if(!isSigningIn) {
+      setIsSigningIn(true)
+      doSignInWithGoogle().catch(err => {
+        setIsSigningIn(false)
       })
-      .catch((err) => setError(err.message));
-  };
+    }
+
+  }
 
   const handleSignUpRedirect = () => {
     navigate("/signup");
@@ -34,7 +54,7 @@ function SignIn() {
       autoClose: 3000,
     });
   };
-
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
       <Navbar />
@@ -42,6 +62,7 @@ function SignIn() {
       {/* Toast Notifications */}
       <ToastContainer />
 
+      {userLoggedIn && (<Navigate to={'/Landing'} replace={true} />)}
       <div className="container mx-auto px-4 py-16 flex flex-col items-center">
         {/* Hero Section */}
         <div className="text-center mb-8">

@@ -3,8 +3,12 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import { ArrowRight, BookOpen, Calendar, Target } from 'lucide-react';
+import { useAuth } from '../contexts/authContext';
 
-function Landing() {
+const Landing = () => {
+
+  const { currentUser } = useAuth()
+
   const [hoveredCard, setHoveredCard] = useState(null);
 
   const services = [
@@ -28,6 +32,10 @@ function Landing() {
   return (
     <div className="bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen flex flex-col">
       <Navbar />
+
+      <div>
+        Hello {currentUser.displayName ? currentUser.displayName : currentUser.email}, you are now logged in. 
+      </div>
       
       <main className="flex-1 flex flex-col items-center px-4 md:px-8 py-12">
         <div className="max-w-7xl w-full">
