@@ -123,33 +123,44 @@ const Landing = () => {
               </ul>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white rounded-lg shadow-md p-6 border border-gray-200"
-            >
-              <h3 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
-                <Calendar className="w-6 h-6 mr-3 text-green-500" />
-                Upcoming Events
-              </h3>
-              <ul className="space-y-4">
-                {[1, 2].map((_, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors"
-                  >
-                    <div className="w-12 h-12 bg-green-100 flex items-center justify-center rounded-lg text-green-500 mr-4">
-                      {`${i + 10} Dec`}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-800">Integrity Workshop {i + 1}</h4>
-                      <p className="text-sm text-gray-600">Virtual training session.</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+           <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="bg-white rounded-lg shadow-md p-6 border border-gray-200"
+>
+  <h3 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+    <Calendar className="w-6 h-6 mr-3 text-green-500" />
+    Upcoming Events
+  </h3>
+  <ul className="space-y-4">
+    {[
+      { date: "10 Dec", name: "Integrity Workshop 1", link: "/events/integrity-workshop-1" },
+      { date: "12 Dec", name: "Leadership Seminar", link: "/events/leadership-seminar" },
+      { date: "15 Dec", name: "Team Collaboration Workshop", link: "/events/team-collaboration-workshop" },
+    ].map((event, index) => (
+      <li
+        key={index}
+        className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors"
+      >
+        <div className="w-12 h-12 bg-green-100 flex items-center justify-center rounded-lg text-green-500 mr-4">
+          {event.date}
+        </div>
+        <div className="flex-1">
+          <h4 className="font-semibold text-gray-800">{event.name}</h4>
+          <p className="text-sm text-gray-600">Virtual training session.</p>
+        </div>
+        <Link
+          to={event.link}
+          className="px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors"
+        >
+          Learn More
+        </Link>
+      </li>
+    ))}
+  </ul>
+</motion.div>
+
           </section>
         </div>
       </main>
