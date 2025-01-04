@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import { ArrowRight, BookOpen, Calendar, Target } from 'lucide-react';
-import { useAuth } from '../contexts/authContext';
 import { motion } from 'framer-motion';
 
 const Landing = () => {
-  const { currentUser } = useAuth();
+  const [username, setUsername] = useState('');
   const [hoveredCard, setHoveredCard] = useState(null);
+
+  useEffect(() => {
+    // Fetch the username from localStorage
+    const storedUsername = localStorage.getItem('username');
+    
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const services = [
     {
@@ -34,9 +42,7 @@ const Landing = () => {
 
       <div className="text-center py-6">
         <p className="text-lg text-gray-700">
-          {currentUser
-            ? `Hello, ${currentUser.displayName || currentUser.email}!`
-            : "Welcome, Guest!"}
+          {username ? `Welcome, ${username}!` : "Welcome, Guest!"}
         </p>
       </div>
 

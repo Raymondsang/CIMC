@@ -1,83 +1,91 @@
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { doCreateUserWithEmailAndPassword } from "./Firebase/auth";
-// import { auth } from "./Firebase/firebase"; 
-// import Navbar from "./Navbar";
-// import Footer from "./Footer"; 
-// import { doSignOut } from "./Firebase/auth";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
 
-// const SignUp = () => {
+function SignUp() {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSigningUp, setIsSigningUp] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setIsSigningUp(true);
+    setErrorMessage("");
+    try {
+      await doCreateUserWithEmailAndPassword(email, password);
+      localStorage.setItem("username", username); // Store username in local storage
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      console.log("Account created successfully");
+      navigate("/"); 
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+    setIsSigningUp(false);
+  };
 
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [confirmPassword, setconfirmPassword] = useState("")
-//   const [isRegistering, setIsRegistering] = useState(false)
-//   const [error, setError] = useState("");
-//   const navigate = useNavigate();
+  return (
+    <div className="w-full min-h-screen flex justify-center items-center bg-green-50">
+      <motion.div
+        className="w-full max-w-md bg-white shadow-lg rounded-lg p-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h3 className="text-2xl font-semibold mb-4 text-center text-green-700">Sign Up</h3>
+        <p className="text-sm mb-4 text-center text-green-600">Create an account to get started</p>
+        <form onSubmit={onSubmit} className="flex flex-col">
+          <input
+            type="text"
+            placeholder="Enter Your Username*"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="placeholder:text-green-700 bg-transparent py-2 my-2 border-b border-green-700 focus:outline-none"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Enter Your Email*"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="placeholder:text-green-700 bg-transparent py-2 my-2 border-b border-green-700 focus:outline-none"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password*"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="placeholder:text-green-700 bg-transparent py-2 my-2 border-b border-green-700 focus:outline-none"
+            required
+          />
+          <button
+            type="submit"
+            disabled={isSigningUp}
+            className={`text-white py-2 my-4 w-full rounded transition-colors duration-200 ${
+              isSigningUp ? "bg-green-300 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
+            }`}
+          >
+            {isSigningUp ? "Creating Account..." : "Sign Up"}
+          </button>
+          {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+          <div className="text-sm mt-4 text-center">
+            <p>
+              Already have an account?{" "}
+              <Link to="/signin" className="text-green-600 hover:underline">
+                Sign In
+              </Link>
+            </p>
+          </div>
+        </form>
+      </motion.div>
+    </div>
+  );
+}
 
-//   const onSubmit = async (e) => {
-//     e.preventDefault()
-//     if(!isSigningIn) {
-//       setIsSigningIn(true)
-//       await doSignInWithEmailAndPassword(email, password)
-//     };
-//   }
-
-//   return (
-    
-//     <div>
-//       <Navbar />
-//       {userLoggedIn && (<Navigate to={'/Landing'} replace={true} />)}
-//     <div className="flex justify-center items-center min-h-screen bg-green-100">
-//       <form className="p-10 bg-white rounded-xl shadow-md w-96">
-//         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-//         {error && <p className="text-red-500 mb-4">{error}</p>}
-//         <div className="mb-4">
-//           <label htmlFor="email" className="block text-gray-700">Email</label>
-//           <input
-//             type="email"
-//             id="email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             className="w-full px-4 py-2 border rounded-md"
-//             placeholder="Enter your email"
-//           />
-//         </div>
-//         <div className="mb-6">
-//           <label htmlFor="password" className="block text-gray-700">Password</label>
-//           <input
-//             type="password"
-//             id="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             className="w-full px-4 py-2 border rounded-md"
-//             placeholder="Enter your password"
-//           />
-//         </div>
-//         <button
-//           onClick={handleSignUp}
-//           className="w-full bg-black text-white py-2 rounded-lg hover:bg-green-700"
-//         >
-//           Sign Up
-//         </button>
-        
-        
-//         <div className="mt-4 text-center">
-//           <p className="text-gray-600">Already have an account? 
-//             <button 
-//               onClick={() => navigate("/signin")}
-//               className="text-green-700 underline ml-1">
-//               Sign In
-//             </button>
-//           </p>
-//         </div>
-//       </form>
-//     </div>
-//     <Footer />
-//     </div>
-   
-//   );
-// }
-
-// export default SignUp;
+export default SignUp;
