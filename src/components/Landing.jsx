@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import { ArrowRight, BookOpen, Calendar, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
+import logo from '../assets/images/CIMC logo_page-0001.jpg'; 
 
 const Landing = () => {
   const [username, setUsername] = useState('');
@@ -46,7 +47,7 @@ const Landing = () => {
 
       <main className="flex-1 flex flex-col items-center px-4 md:px-8 py-8">
         <div className="max-w-6xl w-full">
-          {/* Hero Section */}
+          {/* Hero Section with Logo Behind */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,7 +55,11 @@ const Landing = () => {
             className="relative bg-black rounded-xl overflow-hidden p-8 md:p-12 mb-12 text-white"
           >
             <div className="absolute inset-0 opacity-30 bg-gradient-to-r from-green-400 to-transparent"></div>
-            <div className="relative z-10">
+            <div className="absolute inset-0 flex justify-center items-center opacity-10">
+              {/* Logo placed behind the content */}
+              <img src={logo} alt="Logo" className="w-1/2 sm:w-1/3 md:w-1/4" />
+            </div>
+            <div className="relative z-10 text-center">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 CORIAS <span className="text-green-400">INTEGRITY</span>
               </h1>

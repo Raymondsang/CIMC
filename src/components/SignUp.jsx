@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
+import logo from '../assets/images/CIMC logo_page-0001.jpg'; 
+
 
 function SignUp() {
   const navigate = useNavigate();
