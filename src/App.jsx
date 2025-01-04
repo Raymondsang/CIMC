@@ -10,6 +10,10 @@ import About from './components/About.jsx';
 import ForgotPassword from './components/Forgotpassword.jsx';
 import SignIn from './components/SignIn.jsx';
 import SignUp from './components/SignUp.jsx';
+import Monitoring from './components/Monitoring.jsx';
+import Eia from './components/Eia.jsx';
+import Financialmanagement from './components/Financialmanagement.jsx';
+
 function App() {
   return (
     <Router>
@@ -24,6 +28,9 @@ function App() {
         <Route path='/ContactForm' element={<ContactForm />} />
         <Route path='/Contact' element={<Contact />} />
         <Route path='/About' element={<About />} />
+        <Route path='/Monitoring' element={<Monitoring />} />
+        <Route path='/Eia' element={<Eia />} />
+        <Route path='/Financialmanagement' element={<Financialmanagement />} />
       </Routes>
     </Router>
   );
