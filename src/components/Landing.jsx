@@ -10,9 +10,7 @@ const Landing = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
-    // Fetch the username from localStorage
     const storedUsername = localStorage.getItem('username');
-    
     if (storedUsername) {
       setUsername(storedUsername);
     }
@@ -57,15 +55,15 @@ const Landing = () => {
           >
             <div className="absolute inset-0 opacity-30 bg-gradient-to-r from-green-400 to-transparent"></div>
             <div className="relative z-10">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 CORIAS <span className="text-green-400">INTEGRITY</span>
               </h1>
-              <p className="text-lg md:text-xl mb-8">
+              <p className="text-lg sm:text-xl mb-8">
                 Leading the way in organizational integrity and ethical business practices across Kenya and East Africa.
               </p>
               <Link
                 to="/SignIn"
-                className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition-all"
+                className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition-all w-full sm:w-auto"
               >
                 Get Started
                 <ArrowRight className="ml-3 w-5 h-5" />
@@ -77,10 +75,10 @@ const Landing = () => {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Our Services</h2>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
             >
               {services.map((service, index) => (
                 <motion.div
@@ -88,6 +86,8 @@ const Landing = () => {
                   className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-xl transform transition-all duration-300"
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: 'spring', stiffness: 200 }}
                 >
                   <div className="flex items-center mb-4 text-green-500">
                     {service.icon}
@@ -99,8 +99,8 @@ const Landing = () => {
             </motion.div>
           </section>
 
-          {/* Publications & Events */}
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Publications & Events Section */}
+          <section className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -113,9 +113,12 @@ const Landing = () => {
               </h3>
               <ul className="space-y-4">
                 {[1, 2].map((_, i) => (
-                  <li
+                  <motion.li
                     key={i}
                     className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: i * 0.2 }}
                   >
                     <div className="w-12 h-12 bg-green-100 flex items-center justify-center rounded-lg text-green-500 mr-4">
                       PDF
@@ -124,7 +127,7 @@ const Landing = () => {
                       <h4 className="font-semibold text-gray-800">Integrity Report {2024 - i}</h4>
                       <p className="text-sm text-gray-600">Annual insights and analysis.</p>
                     </div>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </motion.div>
@@ -141,9 +144,12 @@ const Landing = () => {
               </h3>
               <ul className="space-y-4">
                 {[1, 2].map((_, i) => (
-                  <li
+                  <motion.li
                     key={i}
                     className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: i * 0.2 }}
                   >
                     <div className="w-12 h-12 bg-green-100 flex items-center justify-center rounded-lg text-green-500 mr-4">
                       {`${i + 10} Dec`}
@@ -152,7 +158,7 @@ const Landing = () => {
                       <h4 className="font-semibold text-gray-800">Integrity Workshop {i + 1}</h4>
                       <p className="text-sm text-gray-600">Virtual training session.</p>
                     </div>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </motion.div>
