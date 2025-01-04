@@ -55,52 +55,6 @@ const Booking = () => {
     }
   };
   
-
-  
-  // // Handle form submit
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   setMessage('');
-  
-  //   // Basic input validation
-  //   if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time) {
-  //     setMessage('Please fill in all fields.');
-  //     setLoading(false);
-  //     return;
-  //   }
-  
-  //   // Logging the form data for debugging
-  //   console.log('Sending data:', formData);
-  
-  //   // Send booking data to backend
-  //   try {
-  //     const response = await fetch('http://localhost:5000/api/book', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         userName: formData.name,
-  //         userEmail: formData.email,
-  //         appointmentDetails: `Phone: ${formData.phone}, Date: ${formData.date}, Time: ${formData.time}`,
-  //       }),
-  //     });
-  
-  //     const result = await response.json();
-  //     console.log('Backend Response:', result); // Add this line to log the response
-  
-  //     if (response.ok) {
-  //       setMessage(result.message);
-  //     } else {
-  //       setMessage('Error: ' + result.message);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     setMessage('Error booking appointment. Please try again.');
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   return (
     
     <div className="bg-green-100">
@@ -164,6 +118,18 @@ const Booking = () => {
             value={formData.time}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-green-500 rounded-md"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Description:</label>
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            placeholder="Enter the reason for appointment"
             required
           />
         </div>

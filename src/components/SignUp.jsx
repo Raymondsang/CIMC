@@ -1,30 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doCreateUserWithEmailAndPassword } from "./Firebase/auth";
 import { auth } from "./Firebase/FirebaseConfig"; 
 import Navbar from "./Navbar";
 import Footer from "./Footer"; 
+import { doSignOut } from "./Firebase/auth";
 
-function SignUp() {
+const SignUp = () => {
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("")
+  const [isRegistering, setIsRegistering] = useState(false)
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigate("/");  // Navigate to landing/home page on successful sign-up
-      })
-      .catch((err) => setError(err.message));
-  };
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    if(!isSigningIn) {
+      setIsSigningIn(true)
+      await doSignInWithEmailAndPassword(email, password)
+    };
+  }
 
   return (
-
+    
     <div>
       <Navbar />
-         <div className="flex justify-center items-center min-h-screen bg-green-100">
+      {userLoggedIn && (<Navigate to={'/Landing'} replace={true} />)}
+    <div className="flex justify-center items-center min-h-screen bg-green-100">
       <form className="p-10 bg-white rounded-xl shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
