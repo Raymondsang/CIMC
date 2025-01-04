@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "./Firebase/auth";
-import { useAuth} from "../contexts/authContext";
-import { auth } from "./Firebase/FirebaseConfig";
+// import { useAuth} from "./contexts/authContext";
+// import { auth } from "./Firebase/FirebaseConfig";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Mail, Lock, ArrowRight } from "lucide-react";
