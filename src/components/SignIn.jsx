@@ -1,165 +1,109 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "./Firebase/auth";
-// import { useAuth} from "./contexts/authContext";
-// import { auth } from "./Firebase/FirebaseConfig";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import { Mail, Lock, ArrowRight } from "lucide-react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useNavigate, Link } from "react-router-dom";
+import { doSignInWithEmailAndPassword } from "../firebase/auth";
 
-const SignIn = () => {
-
-  const { userLoggedIn } = useAuth()
-
+function SignIn() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = async (e) => {
-    e.preventDefault()
-    if(!isSigningIn) {
-      setIsSigningIn(true)
-      await doSignInWithEmailAndPassword(email, password)
-    };
-
-  //   signInWithEmailAndPassword(auth, email, password)
-  //     .then(() => {
-  //       toast.success("Successfully logged in!", {
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //       });
-  //       setTimeout(() => navigate("/"), 3000); // Redirect after toast
-  //     })
-  //     .catch((err) => setError(err.message));
-  // };
-
-  const onGoogleSignIn = (e) => {
-    e.preventDefault()
-    if(!isSigningIn) {
-      setIsSigningIn(true)
-      doSignInWithGoogle().catch(err => {
-        setIsSigningIn(false)
-      })
+    e.preventDefault();
+    setIsSigningIn(true);
+    setErrorMessage("");
+    try {
+      await doSignInWithEmailAndPassword(email, password);
+      if (rememberMe) {
+        localStorage.setItem("userEmail", email);
+      }
+      setEmail("");
+      setPassword("");
+      console.log("Login successful");
+      navigate("/");
+    } catch (error) {
+      setErrorMessage(error.message);
     }
-
-  }
-
-  const handleSignUpRedirect = () => {
-    navigate("/signup");
-    toast.success("Account created successfully!", {
-      position: "top-center",
-      autoClose: 3000,
-    });
+    setIsSigningIn(false);
   };
-  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-      <Navbar />
-      
-      {/* Toast Notifications */}
-      <ToastContainer />
-
-      {userLoggedIn && (<Navigate to={'/Landing'} replace={true} />)}
-      <div className="container mx-auto px-4 py-16 flex flex-col items-center">
-        {/* Hero Section */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Welcome Back
-          </h2>
-          <p className="text-gray-600 max-w-md mx-auto">
-            Sign in to access your account and manage your appointments
-          </p>
-        </div>
-
-        {/* Sign In Card */}
-        <div className="w-full max-w-md">
-          <div className="bg-white rounded-2xl shadow-xl p-8 border border-green-100">
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-md">
-                <p className="text-red-600">{error}</p>
-              </div>
-            )}
-
-            <form onSubmit={handleSignIn} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email Address
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your email"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your password"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="group relative w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-all duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>Sign In</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </form>
-
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Or continue with</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <button
-                onClick={handleSignUpRedirect}
-                className="w-full bg-green-50 text-gray-800 py-3 rounded-lg hover:bg-green-100 transition-colors duration-200 flex items-center justify-center space-x-2"
-              >
-                Create New Account
-              </button>
-            </div>
+    <div className="w-full min-h-screen flex justify-center items-center bg-green-50">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
+        <h3 className="text-2xl font-semibold mb-4 text-center text-green-700">Sign In</h3>
+        <p className="text-sm mb-4 text-center text-green-600">
+          Welcome back! Please enter your details
+        </p>
+        <form onSubmit={onSubmit} className="flex flex-col">
+          <input
+            type="email"
+            placeholder="Enter Your Email*"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="placeholder:text-green-700 bg-transparent py-2 my-2 border-b border-green-700 focus:outline-none"
+            required
+          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password*"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="placeholder:text-green-700 bg-transparent py-2 my-2 border-b border-green-700 focus:outline-none w-full"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-2 right-2 text-green-600 hover:text-green-800 text-sm"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
           </div>
-
-          {/* Additional Info */}
-          <div className="mt-6 text-center text-gray-600">
-            <p>Need help? <button className="text-green-600 hover:text-green-700">Contact Support</button></p>
+          <div className="flex items-center my-2">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              className="mr-2"
+            />
+            <label className="text-sm text-green-700">Remember Me</label>
           </div>
-        </div>
+          <button
+            type="submit"
+            disabled={isSigningIn}
+            className={`text-white py-2 my-4 w-full rounded transition-colors duration-200 ${
+              isSigningIn
+                ? "bg-green-300 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700"
+            }`}
+          >
+            {isSigningIn ? "Signing In..." : "Sign In"}
+          </button>
+          {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+          <div className="text-sm mt-4 text-center">
+            <p className="mb-2">
+              <Link to="/forgot-password" className="text-green-600 hover:underline">
+                Forgot Password?
+              </Link>
+            </p>
+            <p>
+              Don't have an Account?{" "}
+              <Link to="/signup" className="text-green-600 hover:underline">
+                Sign Up
+              </Link>
+            </p>
+            <p className="mt-2">
+              <Link to="/" className="text-green-600 hover:underline">
+                Go to Home
+              </Link>
+            </p>
+          </div>
+        </form>
       </div>
-
-      <Footer />
     </div>
   );
 }
