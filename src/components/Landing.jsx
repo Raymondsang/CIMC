@@ -82,7 +82,6 @@ const Landing = () => {
                   className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-xl transform transition-all duration-300"
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  whileHover={{ scale: 1.05 }}
                 >
                   <div className="flex items-center mb-4 text-green-500">
                     {service.icon}
