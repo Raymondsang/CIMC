@@ -1,32 +1,51 @@
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updatePassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
 
-export function doCreateUserWithEmailAndPassword(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+// Create a new user with email and password
+export const doCreateUserWithEmailAndPassword = async (email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-export function doSignInWithEmailAndPassword(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
+// Sign in an existing user with email and password
+export const doSignInWithEmailAndPassword = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-export const doSignInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    result.user
-
-    return result
+// Send a password reset email
+export const doSendPasswordResetEmail = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-export const doSignOut = () => {
-    return auth.signOut();
+// Sign out the currently logged-in user
+export const doSignOut = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-
-export const doPasswordReset = (email) => {
-    return sendPasswordResetEmail(auth,email);
+// Set up an observer for auth state changes
+export const onAuthStateChange = (callback) => {
+  return onAuthStateChanged(auth, callback);
 };
-
-export const doPasswordChange = (password) => {
-    return updatePassword(auth.currentUser, password);
-};
-

@@ -1,27 +1,25 @@
-// firebase.js
-import { initializeApp } from 'firebase/app';
-import { getStorage } from 'firebase/storage';
-import { getAuth } from 'firebase/auth';
-import { getDatabase } from "firebase/database";
-
-import { getFirestore } from "@firebase/firestore";
-
-
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDzwLlp3TP0L3ExGU_A9fYJgEH1R5_lbwc",
-  authDomain: "petpal-db8cf.firebaseapp.com",
-  projectId: "petpal-db8cf",
-  storageBucket: "petpal-db8cf.appspot.com",
-  messagingSenderId: "689177586935",
-  appId: "1:689177586935:web:ea5cbf11463a1ad97cf7f2"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
+
+// Initialize Firebase services
 const auth = getAuth(app);
-const database = getDatabase(app);
-
 const db = getFirestore(app);
+const storage = getStorage(app);
 
-export { storage, auth, database, db};
+export { auth, db, storage };
