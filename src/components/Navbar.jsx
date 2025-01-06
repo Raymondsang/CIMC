@@ -18,7 +18,7 @@ function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex-shrink-0"> 
               <img 
-                src="src/assets/images/CIMC logo_page-0001.jpg" 
+                src="src/assets/images/CIMC-removebg.png" 
                 alt="Logo" 
                 className="h-14 w-auto hover:opacity-90 transition-opacity" 
               />
