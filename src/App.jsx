@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Landing from './components/Landing.jsx';
+import Homepage from './components/Homepage.jsx';
 import Booking from './components/Booking';
 import ContactForm from './components/ContactForm.jsx';
 import Contact from './components/Contact.jsx';  
@@ -13,12 +13,15 @@ import SignUp from './components/SignUp.jsx';
 import Monitoring from './components/Monitoring.jsx';
 import Eia from './components/Eia.jsx';
 import Financialmanagement from './components/Financialmanagement.jsx';
+import Landing from './components/Landing.jsx';
+
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/Homepage" element={<Homepage />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
         {/* <Route path='/login' element={<Login />} /> */}

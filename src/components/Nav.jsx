@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
-function Navbar() {
+function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -52,17 +52,15 @@ function Navbar() {
                   isActiveRoute('/about') ? 'w-full' : 'w-0 group-hover:w-full'
                 }`}></span>
               </Link>
-            </nav>
 
-            {/* Desktop CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-6">
+              {/* Book Appointment Button */}
               <Link 
                 to="/Booking" 
-                className="px-6 py-2.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+                className="px-6 py-2 bg-black text-white rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors"
               >
                 Book Appointment
               </Link>
-            </div>
+            </nav>
 
             {/* Mobile Menu Button */}
             <button 
@@ -115,6 +113,7 @@ function Navbar() {
           </div>
         </div>
       </header>
+
       {/* Overlay for mobile menu */}
       {isMenuOpen && (
         <div 
@@ -126,4 +125,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Nav;
