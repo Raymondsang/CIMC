@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import login from "../assets/images/login.jpg";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import { doSignInWithEmailAndPassword } from "../firebase/auth";
 import { useAuth } from "../context/authcontext";
 
 function LogIn() {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const { userLoggedIn, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Handles the email and password sign-in
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsSigningIn(true);
@@ -20,7 +19,7 @@ function LogIn() {
       await doSignInWithEmailAndPassword(email, password);
       setEmail("");  // Clear the email field
       setPassword("");  // Clear the password field
-      navigate('/home'); // Navigate to home page after login
+      navigate('/home'); //
     } catch (error) {
       setErrorMessage(error.message);
     }
