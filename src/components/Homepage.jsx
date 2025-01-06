@@ -68,10 +68,10 @@ const Homepage = () => {
                 practices across Kenya and East Africa.
               </p>
               <Link
-                to="/SignIn"
+                to="/ContactForm"
                 className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition-all w-full sm:w-auto"
               >
-                Get Started
+                Talk to us
                 <ArrowRight className="ml-3 w-5 h-5" />
               </Link>
             </div>

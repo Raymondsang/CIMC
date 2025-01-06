@@ -24,7 +24,7 @@ function SignUp() {
       setEmail("");
       setPassword("");
       console.log("Account created successfully");
-      navigate("/"); 
+      navigate("/Homepage"); 
     } catch (error) {
       setErrorMessage(error.message);
     }
