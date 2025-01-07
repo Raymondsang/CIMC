@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
-import logo from '../assets/images/CIMC logo_page-0001.jpg'; 
-
+import { auth, db, createUserWithEmailAndPassword, setDoc, doc } from "../firebase/firebase";
+import logo from "../assets/images/CIMC-removebg.png"; 
 
 function SignUp() {
   const navigate = useNavigate();
@@ -18,8 +17,20 @@ function SignUp() {
     setIsSigningUp(true);
     setErrorMessage("");
     try {
-      await doCreateUserWithEmailAndPassword(email, password);
-      localStorage.setItem("username", username); // Store username in local storage
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Save the username in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        username: username,
+        email: email,
+      });
+
+      // Optionally, store username in localStorage (for immediate use on the frontend)
+      localStorage.setItem("username", username);
+
+      // Reset fields and navigate
       setUsername("");
       setEmail("");
       setPassword("");

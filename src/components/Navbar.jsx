@@ -54,16 +54,6 @@ function Navbar() {
               </Link>
             </nav>
 
-            {/* Desktop CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-6">
-              <Link 
-                to="/Booking" 
-                className="px-6 py-2.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-              >
-                Book Appointment
-              </Link>
-            </div>
-
             {/* Mobile Menu Button */}
             <button 
               className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -103,18 +93,10 @@ function Navbar() {
                 About
               </Link>
             </nav>
-            <div className="flex flex-col space-y-4">
-              <Link 
-                to="/Booking" 
-                className="px-6 py-3 text-center bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Book Appointment
-              </Link>
-            </div>
           </div>
         </div>
       </header>
+
       {/* Overlay for mobile menu */}
       {isMenuOpen && (
         <div 

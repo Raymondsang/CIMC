@@ -8,12 +8,13 @@ import Nav from "./Nav";
 
 const Homepage = () => {
   const [username, setUsername] = useState("");
-  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
+    if (storedUsername && storedUsername.trim() !== "") {
       setUsername(storedUsername);
+    } else {
+      setUsername("Guest");
     }
   }, []);
 
@@ -41,7 +42,7 @@ const Homepage = () => {
 
       <div className="text-center py-6">
         <p className="text-lg text-gray-700">
-          {username ? `Welcome, ${username}!` : "Welcome, Guest!"}
+          {username && username !== "Guest" ? `Welcome, ${username}!` : "Welcome, Guest!"}
         </p>
       </div>
 
@@ -92,8 +93,6 @@ const Homepage = () => {
                 <motion.div
                   key={index}
                   className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-xl transform transition-all duration-300"
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
@@ -184,7 +183,6 @@ const Homepage = () => {
                       <h4 className="font-semibold text-gray-800">
                         {event.name}
                       </h4>
-                     
                     </div>
                     <Link
                       to={event.link}
