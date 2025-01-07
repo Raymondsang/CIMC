@@ -29,7 +29,6 @@ const staggerContainer = {
 
 const Eia = () => {
   const handleViewBrochure = () => {
-    // Replace with your actual brochure URL
     window.open('src/assets/documents/C2.pdf', '_blank');
   };
 

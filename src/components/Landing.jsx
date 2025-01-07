@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import logo from "../assets/images/CIMC logo_page-0001.jpg";
 import Nav from "./Nav";
 
-const Homepage = () => {
+const Landing = () => {
   const [username, setUsername] = useState("");
   const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -205,4 +205,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Landing;
