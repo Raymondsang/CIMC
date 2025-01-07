@@ -15,7 +15,7 @@ function SignUp() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsSigningUp(true);
-    setErrorMessage("");
+    setErrorMessage("");  
     try {
       // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
