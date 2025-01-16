@@ -1,10 +1,39 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown, Activity, ShoppingBag, Trees, Target, BarChart2 } from 'lucide-react';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
+
+  const services = [
+    {
+      title: "Financial Management Training",
+      icon: <Activity className="w-5 h-5" />,
+      path: "/services"
+    },
+    {
+      title: "Procurement Training",
+      icon: <ShoppingBag className="w-5 h-5" />,
+      path: "/services"
+    },
+    {
+      title: "Environmental & Social Safeguards",
+      icon: <Trees className="w-5 h-5" />,
+      path: "/services"
+    },
+    {
+      title: "Project Management",
+      icon: <Target className="w-5 h-5" />,
+      path: "/services"
+    },
+    {
+      title: "Monitoring & Evaluation",
+      icon: <BarChart2 className="w-5 h-5" />,
+      path: "/services"
+    }
+  ];
 
   const isActiveRoute = (path) => {
     return location.pathname === path;
@@ -12,7 +41,7 @@ function Navbar() {
 
   return (
     <>
-      <header className="bg-white shadow-sm border-b border-green-100">
+      <header className="bg-white shadow-sm border-b border-green-100 relative z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-20 pb-8">
             {/* Logo */}
@@ -39,6 +68,47 @@ function Navbar() {
                   isActiveRoute('/') ? 'w-full' : 'w-0 group-hover:w-full'
                 }`}></span>
               </Link>
+
+              {/* Services Dropdown */}
+              <div className="relative group">
+                <button
+                  className={`flex items-center space-x-1 text-lg font-semibold ${
+                    isDropdownOpen ? 'text-green-600' : 'text-gray-800'
+                  } hover:text-green-600 transition-colors py-2`}
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                >
+                  <span>Services</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${
+                    isDropdownOpen ? 'rotate-180' : ''
+                  }`} />
+                </button>
+
+                {/* Dropdown Menu with updated styling */}
+                <div
+                  className={`absolute top-full left-0 w-72 bg-white shadow-xl rounded-lg py-2 transition-all duration-200 border border-gray-100
+                    ${isDropdownOpen ? 'opacity-100 visible transform translate-y-0' : 'opacity-0 invisible transform -translate-y-2'}
+                  `}
+                  onMouseLeave={() => setIsDropdownOpen(false)}
+                  style={{
+                    zIndex: 1000,
+                    backgroundColor: 'rgba(255, 255, 255, 0.98)'
+                  }}
+                >
+                  {services.map((service, index) => (
+                    <Link
+                      key={index}
+                      to={service.path}
+                      className="flex items-center space-x-3 px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600 transition-colors"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <span className="text-green-500">{service.icon}</span>
+                      <span className="font-medium">{service.title}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <Link 
                 to="/about" 
                 className={`relative group py-2 ${
@@ -53,16 +123,6 @@ function Navbar() {
                 }`}></span>
               </Link>
             </nav>
-
-            {/* Desktop CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-6">
-              <Link 
-                to="/Booking" 
-                className="px-6 py-2.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-              >
-                Book Appointment
-              </Link>
-            </div>
 
             {/* Mobile Menu Button */}
             <button 
@@ -79,12 +139,13 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu - Slides from top */}
+        {/* Mobile Menu - Updated z-index */}
         <div 
           className={`
             absolute top-0 left-0 right-0 bg-white shadow-lg transition-all duration-300 ease-in-out md:hidden
             ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}
           `}
+          style={{ zIndex: 1000 }}
         >
           <div className="p-4 pt-24 pb-8 space-y-6">
             <nav className="flex flex-col space-y-6">
@@ -95,6 +156,25 @@ function Navbar() {
               >
                 Home
               </Link>
+              
+              {/* Mobile Services Menu */}
+              <div className="space-y-3">
+                <div className="text-lg font-semibold text-gray-800">Services</div>
+                <div className="pl-4 space-y-3">
+                  {services.map((service, index) => (
+                    <Link
+                      key={index}
+                      to={service.path}
+                      className="flex items-center space-x-3 text-gray-700 hover:text-green-600 transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <span className="text-green-500">{service.icon}</span>
+                      <span>{service.title}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <Link 
                 to="/about" 
                 className={`text-lg font-semibold ${isActiveRoute('/about') ? 'text-green-600' : 'text-gray-800'} hover:text-green-600 transition-colors`}
@@ -103,22 +183,15 @@ function Navbar() {
                 About
               </Link>
             </nav>
-            <div className="flex flex-col space-y-4">
-              <Link 
-                to="/Booking" 
-                className="px-6 py-3 text-center bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Book Appointment
-              </Link>
-            </div>
           </div>
         </div>
       </header>
-      {/* Overlay for mobile menu */}
+
+      {/* Overlay for mobile menu - Updated z-index */}
       {isMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-20 md:hidden z-40"
+          className="fixed inset-0 bg-black bg-opacity-20 md:hidden"
+          style={{ zIndex: 999 }}
           onClick={() => setIsMenuOpen(false)}
         ></div>
       )}

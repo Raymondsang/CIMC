@@ -23,7 +23,7 @@ function SignIn() {
       setEmail("");
       setPassword("");
       console.log("Login successful");
-      navigate("/");
+      navigate("/Homepage");
     } catch (error) {
       setErrorMessage(error.message);
     }

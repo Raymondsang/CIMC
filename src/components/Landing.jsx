@@ -1,208 +1,237 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Footer from "./Footer";
-import { ArrowRight, BookOpen, Calendar, Target } from "lucide-react";
-import { motion } from "framer-motion";
-import logo from "../assets/images/CIMC logo_page-0001.jpg";
-import Nav from "./Nav";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Activity, ShoppingBag, Trees, Target, BarChart2, ArrowRight, Users, Award, Building } from 'lucide-react';
+import wallpaper from '../assets/images/wallpaper1.jpg';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
-const Landing = () => {
-  const [username, setUsername] = useState("");
-  const [hoveredCard, setHoveredCard] = useState(null);
-
-  useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-  }, []);
-
+const LandingPage = () => {
   const services = [
     {
-      title: "Corruption Risk Assessment",
-      description: "Comprehensive analysis and mitigation strategies.",
+      title: "Financial Management Training",
+      description: "Comprehensive training on financial management practices for donor-funded projects.",
+      icon: <Activity className="w-8 h-8" />,
+      link: "/financial-management"
+    },
+    {
+      title: "Procurement Training",
+      description: "Expert guidance on procurement processes in donor-funded projects.",
+      icon: <ShoppingBag className="w-8 h-8" />,
+      link: "/procurement"
+    },
+    {
+      title: "Environmental & Social Safeguards",
+      description: "Training on environmental and social impact management in donor projects.",
+      icon: <Trees className="w-8 h-8" />,
+      link: "/safeguards"
+    },
+    {
+      title: "Project Management",
+      description: "Comprehensive project management training for donor-funded initiatives.",
       icon: <Target className="w-8 h-8" />,
+      link: "/project-management"
     },
     {
-      title: "Research & Surveys",
-      description: "Data-driven insights and actionable solutions.",
-      icon: <BookOpen className="w-8 h-8" />,
-    },
-    {
-      title: "Peer Review Seminars",
-      description: "Collaborative learning and development sessions.",
-      icon: <Calendar className="w-8 h-8" />,
+      title: "Monitoring & Evaluation",
+      description: "Strategic M&E training for effective project tracking and assessment.",
+      icon: <BarChart2 className="w-8 h-8" />,
+      link: "/monitoring"
     },
   ];
 
-  return (
-    <div className="bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen flex flex-col">
-      <Nav />
+  const stats = [
+    { icon: <Users className="w-8 h-8" />, value: "500+", label: "Professionals Trained" },
+    { icon: <Award className="w-8 h-8" />, value: "50+", label: "Training Programs" },
+    { icon: <Building className="w-8 h-8" />, value: "20+", label: "Development Partners" }
+  ];
 
-      <div className="text-center py-6">
-        <p className="text-lg text-gray-700">
-          {username ? `Welcome, ${username}!` : "Welcome, Guest!"}
-        </p>
+  return (
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      {/* Hero Section with Wallpaper */}
+      <div className="relative h-[70vh] bg-black">
+        <img 
+          src={wallpaper}
+          alt="Hero" 
+          className="w-full h-full object-cover opacity-70"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <div 
+            className="text-center text-white px-4"
+            style={{
+              animation: "fadeInUp 1s ease-out"
+            }}
+          >
+            <h1 className="text-5xl font-bold mb-6">CORIAS INTEGRITY</h1>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Leading the way in organizational integrity and ethical business practices across Kenya and East Africa.
+            </p>
+            <Link
+              to="/SignIn"
+              className="inline-flex items-center px-8 py-4 bg-green-500 text-white rounded-lg text-lg font-semibold hover:bg-green-600 transition-all transform hover:scale-105"
+            >
+              Get Started
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
+        </div>
       </div>
 
-      <main className="flex-1 flex flex-col items-center px-4 md:px-8 py-8">
-        <div className="max-w-6xl w-full">
-          {/* Hero Section with Logo Behind */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative bg-black rounded-xl overflow-hidden p-8 md:p-12 mb-12 text-white"
+      {/* Services Section */}
+      <div className="py-20 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 
+            className="text-4xl font-bold text-center mb-12"
+            style={{
+              animation: "fadeIn 1s ease-out"
+            }}
           >
-            <div className="absolute inset-0 opacity-30 bg-gradient-to-r from-green-400 to-transparent"></div>
-            <div className="absolute inset-0 flex justify-center items-center opacity-10">
-              {/* Logo placed behind the content */}
-              <img src={logo} alt="Logo" className="w-1/2 sm:w-1/3 md:w-1/4 " />
-            </div>
-            <div className="relative z-10 text-center">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                CORIAS <span className="text-green-400">INTEGRITY</span>
-              </h1>
-              <p className="text-lg sm:text-xl mb-8">
-                Leading the way in organizational integrity and ethical business
-                practices across Kenya and East Africa.
-              </p>
-              <Link
-                to="/SignIn"
-                className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition-all w-full sm:w-auto"
+            Our Services
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300"
+                style={{
+                  animation: `slideUp 0.8s ease-out ${index * 0.1}s backwards`
+                }}
               >
-                Get Started
-                <ArrowRight className="ml-3 w-5 h-5" />
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Services Section */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
-              Our Services
-            </h2>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-            >
-              {services.map((service, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-xl transform transition-all duration-300"
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 200 }}
+                <div className="text-green-500 mb-4">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <p className="text-gray-600 mb-6">{service.description}</p>
+                <Link
+                  to={service.link}
+                  className="inline-flex items-center text-green-500 hover:text-green-600 group"
                 >
-                  <div className="flex items-center mb-4 text-green-500">
-                    {service.icon}
-                    <h3 className="ml-3 text-xl font-semibold">
-                      {service.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-600">{service.description}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </section>
-
-          {/* Publications & Events Section */}
-          <section className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white rounded-lg shadow-md p-6 border border-gray-200"
-            >
-              <h3 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
-                <BookOpen className="w-6 h-6 mr-3 text-green-500" />
-                Latest Publications
-              </h3>
-              <ul className="space-y-4">
-                {[1, 2].map((_, i) => (
-                  <motion.li
-                    key={i}
-                    className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: i * 0.2 }}
-                  >
-                    <div className="w-12 h-12 bg-green-100 flex items-center justify-center rounded-lg text-green-500 mr-4">
-                      PDF
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-800">
-                        Integrity Report {2024 - i}
-                      </h4>
-                      <p className="text-sm text-gray-600">
-                        Annual insights and analysis.
-                      </p>
-                    </div>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white rounded-lg shadow-md p-6 border border-gray-200"
-            >
-              <h3 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
-                <Calendar className="w-6 h-6 mr-6 text-green-500" />
-                Upcoming Events
-              </h3>
-              <ul className="space-y-8 space-x-4 m-2">
-                {[
-                  {
-                    date: "3rd-7th March 2025",
-                    name: "Monitoring and Evaluation Course for Project Implementation Units (PIUS)",
-                    link: "/Monitoring",
-                  },
-                  {
-                    date: "Coming soon",
-                    name: "Environment, Social Health and Safety Training (ESHS)",
-                    link: "/Eia",
-                  },
-                  {
-                    date: "3rd-7th March 2025",
-                    name: "Financial Management and Disbursement Training For Staff In Government/World Bank Funded Projects",
-                    link: "/Financialmanagement",
-                  },
-                ].map((event, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors"
-                  >
-                    <div className="w-12 h-12 bg-green-100 flex items-center justify-center rounded-lg text-green-500 ">
-                      {event.date}
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-gray-800">
-                        {event.name}
-                      </h4>
-                     
-                    </div>
-                    <Link
-                      to={event.link}
-                      className="px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors m-2"
-                    >
-                      Learn More
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </section>
+                  <span className="relative">
+                    Learn More
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                  </span>
+                  <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" />
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
+      </div>
+
+      {/* Who We Are Section with Stats */}
+      <div className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 
+            className="text-4xl font-bold text-center mb-8"
+            style={{
+              animation: "fadeIn 1s ease-out"
+            }}
+          >
+            Who We Are
+          </h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div 
+              className="text-lg text-gray-700 leading-relaxed"
+              style={{
+                animation: "slideRight 1s ease-out"
+              }}
+            >
+              <p className="mb-6">
+                CORIAS Integrity is a leading consultancy firm specializing in capacity building 
+                and training for donor-funded projects across East Africa. With years of expertise 
+                in financial management, procurement, environmental safeguards, and project 
+                management, we empower organizations to achieve their objectives while maintaining 
+                the highest standards of integrity and compliance.
+              </p>
+              <p>
+                We pride ourselves on our deep understanding of donor requirements, local contexts, 
+                and international best practices. Our comprehensive training programs are designed 
+                to address the unique challenges faced by project implementation units, ensuring 
+                sustainable development impact while maintaining strict adherence to donor 
+                guidelines and procedures.
+              </p>
+            </div>
+            <div 
+              className="grid grid-cols-1 gap-8"
+              style={{
+                animation: "slideLeft 1s ease-out"
+              }}
+            >
+              {stats.map((stat, index) => (
+                <div 
+                  key={index}
+                  className="flex items-center bg-white rounded-lg shadow-md p-6 transform hover:scale-105 transition-transform duration-300"
+                >
+                  <div className="text-green-500 mr-6">
+                    {stat.icon}
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-gray-900">{stat.value}</div>
+                    <div className="text-gray-600">{stat.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes fadeInUp {
+            from { 
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes slideUp {
+            from { 
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes slideRight {
+            from { 
+              opacity: 0;
+              transform: translateX(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          @keyframes slideLeft {
+            from { 
+              opacity: 0;
+              transform: translateX(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        `}
+      </style>
 
       <Footer />
     </div>
   );
 };
 
-export default Landing;
+export default LandingPage;

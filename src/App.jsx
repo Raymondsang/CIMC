@@ -14,6 +14,8 @@ import Monitoring from './components/Monitoring.jsx';
 import Eia from './components/Eia.jsx';
 import Financialmanagement from './components/Financialmanagement.jsx';
 import Landing from './components/Landing.jsx';
+import Services from './components/Services.jsx';
+
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
         <Route path="/Homepage" element={<Homepage />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
+
         {/* <Route path='/login' element={<Login />} /> */}
         {/* <Route path='/register' element={<Register />} /> */}
         <Route path='/forgot-password' element={<ForgotPassword />} />
@@ -34,6 +37,7 @@ function App() {
         <Route path='/Monitoring' element={<Monitoring />} />
         <Route path='/Eia' element={<Eia />} />
         <Route path='/Financialmanagement' element={<Financialmanagement />} />
+        <Route path='/services' element={<Services />} />
       </Routes>
     </Router>
   );

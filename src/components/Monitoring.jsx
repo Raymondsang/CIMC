@@ -188,13 +188,16 @@ const Monitoring = () => {
             <h2 className="text-xl font-bold text-green-800 mb-4">
               Ready to Enhance Your M&E Skills?
             </h2>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors"
-            >
-              Register Now
-            </motion.button>
+            <motion.a
+  href="https://docs.google.com/forms/d/e/1FAIpQLSc0WuT4FqE2-wGGPilzCbzK4Ep8PD6OWHfouEy4qyEEANxh9Q/viewform?usp=dialog" // Replace this with your valid URL
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors inline-block"
+>
+  Register Now
+</motion.a>
           </motion.div>
         </div>
       </motion.div>

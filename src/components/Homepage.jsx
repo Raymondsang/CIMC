@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { ArrowRight, BookOpen, Calendar, Target } from "lucide-react";
 import { motion } from "framer-motion";
-import logo from "../assets/images/CIMC logo_page-0001.jpg";
 import Nav from "./Nav";
+
 
 const Homepage = () => {
   const [username, setUsername] = useState("");
-  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
+    if (storedUsername && storedUsername.trim() !== "") {
       setUsername(storedUsername);
+    } else {
+      setUsername("Guest");
     }
   }, []);
 
@@ -41,7 +42,7 @@ const Homepage = () => {
 
       <div className="text-center py-6">
         <p className="text-lg text-gray-700">
-          {username ? `Welcome, ${username}!` : "Welcome, Guest!"}
+          {username && username !== "Guest" ? `Welcome, ${username}!` : "Welcome, Guest!"}
         </p>
       </div>
 
@@ -55,10 +56,7 @@ const Homepage = () => {
             className="relative bg-black rounded-xl overflow-hidden p-8 md:p-12 mb-12 text-white"
           >
             <div className="absolute inset-0 opacity-30 bg-gradient-to-r from-green-400 to-transparent"></div>
-            <div className="absolute inset-0 flex justify-center items-center opacity-10">
-              {/* Logo placed behind the content */}
-              <img src={logo} alt="Logo" className="w-1/2 sm:w-1/3 md:w-1/4 " />
-            </div>
+            
             <div className="relative z-10 text-center">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 CORIAS <span className="text-green-400">INTEGRITY</span>
@@ -68,10 +66,10 @@ const Homepage = () => {
                 practices across Kenya and East Africa.
               </p>
               <Link
-                to="/ContactForm"
+                to="/GetInTouch"
                 className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition-all w-full sm:w-auto"
               >
-                Talk to us
+                Get In Touch
                 <ArrowRight className="ml-3 w-5 h-5" />
               </Link>
             </div>
@@ -92,8 +90,6 @@ const Homepage = () => {
                 <motion.div
                   key={index}
                   className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-xl transform transition-all duration-300"
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
@@ -184,7 +180,6 @@ const Homepage = () => {
                       <h4 className="font-semibold text-gray-800">
                         {event.name}
                       </h4>
-                     
                     </div>
                     <Link
                       to={event.link}
