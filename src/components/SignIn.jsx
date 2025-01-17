@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../firebase/firebase"; // Update the import
 import { doSignInWithEmailAndPassword } from "../firebase/auth";
 
 function SignIn() {
@@ -28,6 +30,17 @@ function SignIn() {
       setErrorMessage(error.message);
     }
     setIsSigningIn(false);
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Google login successful");
+      navigate("/Homepage");
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   return (
@@ -83,22 +96,20 @@ function SignIn() {
           >
             {isSigningIn ? "Signing In..." : "Sign In"}
           </button>
+
+          <button
+            onClick={handleGoogleLogin}
+            className="text-white py-2 my-4 w-full bg-blue-600 hover:bg-blue-700 rounded"
+          >
+            Sign in with Google
+          </button>
+
           {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
           <div className="text-sm mt-4 text-center">
-            <p className="mb-2">
-              <Link to="/forgot-password" className="text-green-600 hover:underline">
-                Forgot Password?
-              </Link>
-            </p>
             <p>
-              Don't have an Account?{" "}
+              Don't have an account?{" "}
               <Link to="/signup" className="text-green-600 hover:underline">
                 Sign Up
-              </Link>
-            </p>
-            <p className="mt-2">
-              <Link to="/" className="text-green-600 hover:underline">
-                Go to Home
               </Link>
             </p>
           </div>

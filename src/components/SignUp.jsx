@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { auth, db, createUserWithEmailAndPassword, setDoc, doc } from "../firebase/firebase";
+import { auth, db, createUserWithEmailAndPassword, setDoc, doc, signInWithPopup, googleProvider } from "../firebase/firebase";
 import logo from "../assets/images/CIMC-removebg.png"; 
 
 function SignUp() {
@@ -40,6 +40,25 @@ function SignUp() {
       setErrorMessage(error.message);
     }
     setIsSigningUp(false);
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      
+      // Save user details to Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        username: user.displayName,
+        email: user.email,
+      });
+
+      // Reset fields and navigate
+      console.log("Google login successful");
+      navigate("/Homepage");
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   return (
@@ -86,6 +105,14 @@ function SignUp() {
           >
             {isSigningUp ? "Creating Account..." : "Sign Up"}
           </button>
+
+          <button
+            onClick={handleGoogleLogin}
+            className="text-white py-2 my-4 w-full bg-blue-600 hover:bg-blue-700 rounded"
+          >
+            Sign up with Google
+          </button>
+
           {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
           <div className="text-sm mt-4 text-center">
             <p>
